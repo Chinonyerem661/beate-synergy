@@ -109,11 +109,51 @@ function Details() {
 }
 /* ── enquiry form ─────────────────────────────────────────────────────────── */
 function Enquiry() {
+  const [submitting, setSubmitting] = useState(false)
   const [sent, setSent] = useState(false)
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    setSubmitting(true)
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${company.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `New Project Enquiry from ${formData.get('name')}`,
+          _captcha: 'false',
+          Name: formData.get('name'),
+          Company: formData.get('company'),
+          Email: formData.get('email'),
+          Phone: formData.get('phone'),
+          Service: formData.get('service'),
+          Message: formData.get('message'),
+        }),
+      })
+
+      if (res.ok) {
+        setSent(true)
+      } else {
+        throw new Error('Network response was not ok')
+      }
+    } catch {
+      // Mailto fallback if network or ad-blocker interferes
+      const mailtoUrl = `mailto:${company.email}?subject=${encodeURIComponent(
+        `Project Enquiry from ${formData.get('name') || ''}`
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.get('name')}\nCompany: ${formData.get('company')}\nEmail: ${formData.get('email')}\nPhone: ${formData.get('phone')}\nService: ${formData.get('service')}\n\nMessage:\n${formData.get('message')}`
+      )}`
+      window.location.href = mailtoUrl
+      setSent(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -150,10 +190,12 @@ function Enquiry() {
                     ✓
                   </div>
                   <h3 className="mt-6 font-display text-xl font-extrabold text-forest-600">
-                    Thank you — message received
+                    Thank you — enquiry sent!
                   </h3>
                   <p className="mt-3 text-sm leading-[1.7] text-ink/60">
-                    A member of our team will respond shortly. For anything urgent, call{' '}
+                    Your enquiry has been delivered to{' '}
+                    <span className="font-semibold text-ink">{company.email}</span>. A member of our
+                    engineering team will respond shortly. For anything urgent, call{' '}
                     <a href={`tel:+234${company.phones[0].slice(1)}`} className="font-bold text-forest-600">
                       {company.phones[0]}
                     </a>
@@ -230,13 +272,15 @@ function Enquiry() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full">
-                    Send enquiry
+                  <Button type="submit" className="w-full" disabled={submitting}>
+                    {submitting ? 'Sending enquiry…' : 'Send enquiry'}
                   </Button>
 
-                  <p className="text-center text-xs leading-[1.6] text-ink/40">
-                    This form is a front-end demo — no message is transmitted yet. Connect it to your
-                    mail provider before launch.
+                  <p className="text-center text-xs leading-[1.6] text-ink/45">
+                    Enquiries are sent directly to{' '}
+                    <a href={`mailto:${company.email}`} className="font-semibold text-forest-600 hover:underline">
+                      {company.email}
+                    </a>
                   </p>
                 </form>
               )}

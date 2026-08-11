@@ -135,7 +135,7 @@ export const services: Service[] = [
     title: 'Procurement & Consulting',
     summary:
       'We offer supply chain expertise and technical advisory services to mitigate risks and enhance project outcomes.',
-    image: '/images/procurement.jpg',
+    image: '/images/black-warehouse-worker.png',
     items: [
       {
         title: 'Specialized Procurement',

@@ -30,7 +30,7 @@ function PageHero() {
         src="/images/helmet-dark.jpg"
         alt=""
         aria-hidden
-        className="absolute inset-0 -z-20 h-full w-full object-cover"
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-top"
       />
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
       <Rings tone="warm" className="-right-28 top-6 -z-10 w-[26rem] opacity-35" />
@@ -55,7 +55,7 @@ function WhoWeAre() {
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:items-center">
           <Reveal direction="right" className="relative mx-auto w-full max-w-md">
-            <Polaroid src="/images/about-team.jpg" alt="The Beate Synergy team at work" rotate={-3} />
+            <Polaroid src="/images/about-team-2.jpg" alt="The Beate Synergy team at work" rotate={-3} />
           </Reveal>
 
           <Reveal delay={110} direction="left">
