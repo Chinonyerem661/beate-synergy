@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import { Button, Container, Eyebrow, Reveal, Section, SectionHeading } from '../components/ui'
 import { HatchCorner, NumberBadge, Polaroid, Rings, Sheet } from '../components/motifs'
 import {
@@ -67,7 +68,7 @@ function Welcome() {
       <HatchCorner />
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_1fr]">
-          <Reveal>
+          <Reveal direction="right">
             <Eyebrow>Welcome</Eyebrow>
             <h2 className="text-[2rem] text-forest-600 sm:text-[2.6rem] lg:text-[3.1rem]">
               Innovating engineering solutions
@@ -82,12 +83,10 @@ function Welcome() {
             </div>
           </Reveal>
 
-          <Reveal delay={120} className="relative mx-auto w-full max-w-md">
+          <Reveal delay={120} direction="left" className="relative mx-auto w-full max-w-md">
             <Polaroid src="/images/engineers-ppe.jpg" alt="Engineers in PPE reviewing plans on site" rotate={-3} />
           </Reveal>
         </div>
-
-
       </Container>
     </Section>
   )
@@ -114,7 +113,7 @@ function Capabilities() {
 
             <ul className="mt-12 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
               {capabilities.map((c, i) => (
-                <Reveal key={c} delay={i * 70}>
+                <Reveal key={c} delay={i * 70} direction="up">
                   <li className="flex items-start gap-4 border-t border-white/12 pt-5">
                     <NumberBadge n={i + 1} />
                     <span className="font-display text-[1.02rem] font-bold leading-[1.45] text-white">
@@ -154,45 +153,41 @@ function Services() {
             const flip = i % 2 === 1
 
             return (
-              <Reveal key={s.slug}>
-                <div className="grid items-center gap-12 lg:grid-cols-2">
-                  <div className={`relative ${flip ? 'lg:order-2' : ''}`}>
-                    <Polaroid
-                      src={s.image}
-                      alt={s.title}
-                      rotate={flip ? 2.5 : -2.5}
-                      ratio="aspect-[5/4]"
-                      className="mx-auto max-w-lg"
-                    />
-                    <span className="absolute -bottom-4 left-2 font-display text-[4.5rem] font-extrabold leading-none text-bone-300 sm:text-[5.5rem]">
-                      0{i + 1}
-                    </span>
-                  </div>
+              <div key={s.slug} className="grid items-center gap-12 lg:grid-cols-2">
+                <Reveal direction={flip ? "left" : "right"} className={`relative ${flip ? 'lg:order-2' : ''}`}>
+                  <Polaroid
+                    src={s.image}
+                    alt={s.title}
+                    rotate={flip ? 2.5 : -2.5}
+                    ratio="aspect-[5/4]"
+                    className="mx-auto max-w-lg"
+                  />
+                  <span className="pointer-events-none absolute -bottom-4 left-2 select-none font-display text-[4.5rem] font-extrabold leading-none text-bone-300/40 sm:text-[5.5rem]">
+                    0{i + 1}
+                  </span>
+                </Reveal>
 
-                  <div className={flip ? 'lg:order-1' : ''}>
-                    <Icon className="h-12 w-12 text-ink" />
-                    <h3 className="mt-5 text-[1.5rem] text-forest-600 sm:text-[1.85rem]">{s.title}</h3>
-                    <p className="mt-4 text-[0.95rem] leading-[1.8] text-ink/65">{s.summary}</p>
+                <Reveal direction={flip ? "right" : "left"} className={flip ? 'lg:order-1' : ''}>
+                  <Icon className="h-12 w-12 text-ink" />
+                  <h3 className="mt-5 text-[1.5rem] text-forest-600 sm:text-[1.85rem]">{s.title}</h3>
+                  <p className="mt-4 text-[0.95rem] leading-[1.8] text-ink/65">{s.summary}</p>
 
-                    <ul className="mt-7 space-y-4">
-                      {s.items.map((it, k) => (
-                        <li key={it.title} className="flex gap-3.5">
-                          <NumberBadge n={k + 1} className="mt-0.5 h-6 w-6 text-[0.7rem]" />
-                          <div>
-                            <p className="font-display text-[0.95rem] font-bold text-ink">{it.title}</p>
-                            <p className="mt-1 text-sm leading-[1.7] text-ink/60">{it.body}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </Reveal>
+                  <ul className="mt-7 space-y-4">
+                    {s.items.map((it, k) => (
+                      <li key={it.title} className="flex gap-3.5">
+                        <NumberBadge n={k + 1} className="mt-0.5 h-6 w-6 text-[0.7rem]" />
+                        <div>
+                          <p className="font-display text-[0.95rem] font-bold text-ink">{it.title}</p>
+                          <p className="mt-1 text-sm leading-[1.7] text-ink/60">{it.body}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              </div>
             )
           })}
         </div>
-
-
       </Container>
     </Section>
   )
@@ -296,35 +291,61 @@ function Industries() {
 /* ── clients & partners ───────────────────────────────────────────────────── */
 function Clients() {
   return (
-    <Section className="bg-bone-200">
+    <Section className="bg-white">
       <Container>
+        {/* Clients */}
         <SectionHeading
-          eyebrow="Trusted by"
-          title="Our clients & partners"
+          eyebrow=""
+          title={<>Our <span className="text-forest-600">Clients</span></>}
           align="center"
           className="mb-12"
         />
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8">
           {clients.map((c, i) => (
-            <Reveal key={c} delay={i * 30}>
-              <span className="inline-flex rounded-full border border-ink/10 bg-white px-6 py-3 font-display text-sm font-semibold text-ink/75">
-                {c}
-              </span>
+            <Reveal key={c.name} delay={i * 25}>
+              {c.logo ? (
+                <motion.img
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  src={c.logo}
+                  alt={c.name}
+                  title={c.name}
+                  className={`w-auto max-w-[140px] object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${c.logoClass ?? 'h-12'} ${c.removeBg ? 'mix-blend-multiply' : ''}`}
+                />
+              ) : (
+                <motion.span
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  className="inline-block cursor-pointer font-display text-base font-bold text-ink/60 transition-colors hover:text-ink"
+                >
+                  {c.name}
+                </motion.span>
+              )}
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <span className="eyebrow text-ink/40">Partners</span>
-          {partners.map((p) => (
-            <span
-              key={p}
-              className="inline-flex rounded-full bg-ink px-6 py-3 font-display text-sm font-bold text-white"
-            >
-              {p}
-            </span>
-          ))}
+        {/* Partners divider */}
+        <div className="mt-16 border-t border-ink/10 pt-14">
+          <SectionHeading
+            eyebrow=""
+            title={<>Our <span className="text-forest-600">Partners</span></>}
+            align="center"
+            className="mb-10"
+          />
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+            {partners.map((p) => (
+              <motion.span
+                key={p}
+                whileHover={{ scale: 1.08, y: -2 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                className="inline-block cursor-pointer font-display text-xl font-extrabold tracking-tight text-ink/60 transition-colors hover:text-ink"
+              >
+                {p}
+              </motion.span>
+            ))}
+          </div>
         </div>
       </Container>
     </Section>

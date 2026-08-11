@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
 export function Container({ children, className = '' }: { children: ReactNode; className?: string }) {
@@ -119,42 +119,46 @@ export function Button({
   )
 }
 
-/** Fades content in on first scroll into view. */
+import { motion } from 'framer-motion'
+
+/** Fades and slides content smoothly in when scrolled into view using Framer Motion. */
 export function Reveal({
   children,
   delay = 0,
+  direction = 'up',
+  duration = 0.95,
   className = '',
 }: {
   children: ReactNode
   delay?: number
+  direction?: 'up' | 'down' | 'left' | 'right' | 'none'
+  duration?: number
   className?: string
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [shown, setShown] = useState(false)
+  const offsets = {
+    up: { y: 40, x: 0 },
+    down: { y: -40, x: 0 },
+    left: { x: 40, y: 0 },
+    right: { x: -40, y: 0 },
+    none: { x: 0, y: 0 },
+  }
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true)
-          io.disconnect()
-        }
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -60px' },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
+  const initialOffset = offsets[direction]
 
   return (
-    <div
-      ref={ref}
-      className={`reveal ${shown ? 'reveal-in' : ''} ${className}`}
-      style={{ transitionDelay: shown ? `${delay}ms` : undefined }}
+    <motion.div
+      initial={{ opacity: 0, ...initialOffset }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{
+        duration,
+        delay: delay > 10 ? delay / 1000 : delay,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={className}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
+

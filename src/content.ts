@@ -271,28 +271,33 @@ export const industries = [
   { name: 'Upstream & Midstream Sectors (Oil and Gas)', accent: true,  image: '/images/ind-upstream.jpg' },
   { name: 'Oilfield Service Companies',                  accent: false, image: '/images/ind-oilfield.jpg' },
   { name: 'Drilling Contractors',                        accent: false, image: '/images/ind-drilling.jpg' },
-  { name: 'Exploration & Production (E&P) Companies (IOCs, Independents, NOCs)', accent: false, image: '/images/ind-exploration.jpg' },
+  { name: 'Exploration & Production (E&P) Companies (IOCs, Independents, NOCs)', accent: false, image: '/images/aerial-plant.jpg' },
   { name: 'Engineering, Procurement, and Construction (EPC) Contractors', accent: true, image: '/images/helmet-dark.jpg' },
 ]
 
 export const industriesNote =
   'We understand the unique challenges and operational intricacies of the sector and provide solutions that enhance safety, efficiency, and profitability.'
 
-export const clients = [
-  'ExxonMobil',
-  'NNPC',
-  'Chevron',
-  'Shell',
-  'TotalEnergies',
-  'Seplat Energy',
-  'Baker Hughes',
-  'Renaissance',
-  'Aiteo',
-  'Aviam Offshore',
-  'Zamon Petroleum',
-  'Sigmund',
-  'Schulltech',
-  'Addax Petroleum',
-] as const
+export type Client = { name: string; logo?: string; logoClass?: string; removeBg?: boolean }
+
+export const clients: Client[] = [
+  { name: 'ExxonMobil',       logo: '/images/ExxonMobil-Logo.wine.svg',   logoClass: 'h-16' },
+  { name: 'NNPC',             logo: '/images/NNPC-Logo.png' },
+  { name: 'NLNG',             logo: '/images/NLNG.png' },
+  { name: 'TotalEnergies',    logo: '/images/Total-energies.jpg',  removeBg: true },
+  { name: 'Seplat Energy',    logo: '/images/Seplat-Energy.png',          logoClass: 'h-16' },
+  { name: 'Baker Hughes',     logo: '/images/436-4367350_baker-hughes-new-logo-hd-png-download.png', removeBg: true },
+  { name: 'Chevron',          logo: '/images/chevron.jpg' },
+  { name: 'Shell',            logo: '/images/shell-logo.png' },
+  { name: 'N-Power',          logo: '/images/N-Power-Logo.jpg' },
+  { name: 'Aiteo',            logo: '/images/logo-aiteo-big.png' },
+  { name: 'Aviam Offshore',   logo: '/images/aviam-logo.jpg',             logoClass: 'h-16' },
+  { name: 'Zamon Petroleum' },
+  { name: 'Sigmund',          logo: '/images/sigmund.png' },
+  { name: 'Schulltech',       logo: '/images/schulltech-logo.png' },
+  { name: 'Addax Petroleum',  logo: '/images/ADDAX-logo.webp' },
+  { name: 'Waltersmith',      logo: '/images/waltersmith.png',            logoClass: 'h-16' },
+  { name: 'Renaissance' },
+]
 
 export const partners = ['Crafwell', 'Allianz'] as const

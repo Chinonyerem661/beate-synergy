@@ -1,5 +1,5 @@
 import { Button, Container, Eyebrow, Reveal, Section, SectionHeading } from '../components/ui'
-import { Dot, HatchCorner, NumberBadge, Polaroid, Rings, Sheet } from '../components/motifs'
+import { HatchCorner, NumberBadge, Polaroid, Rings, Sheet } from '../components/motifs'
 import {
   IconBulb,
   IconGrowth,
@@ -48,21 +48,17 @@ function PageHero() {
     </section>
   )
 }
-
-/* ── who we are ───────────────────────────────────────────────────────────── */
 function WhoWeAre() {
   return (
     <Section className="overflow-hidden bg-white">
       <HatchCorner />
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <Reveal className="relative mx-auto w-full max-w-md">
+          <Reveal direction="right" className="relative mx-auto w-full max-w-md">
             <Polaroid src="/images/about-team.jpg" alt="The Beate Synergy team at work" rotate={-3} />
-            <Dot tone="red" size={32} className="-left-5 bottom-6" />
-            <Dot tone="green" size={20} className="-right-3 top-4" />
           </Reveal>
 
-          <Reveal delay={110}>
+          <Reveal delay={110} direction="left">
             <Eyebrow>Who we are</Eyebrow>
             <h2 className="text-[2rem] text-forest-600 sm:text-[2.6rem]">
               Local expertise, international best practice
@@ -77,8 +73,6 @@ function WhoWeAre() {
             </div>
           </Reveal>
         </div>
-
-
       </Container>
     </Section>
   )
@@ -90,7 +84,7 @@ function MissionVision() {
     <Section className="bg-bone-200">
       <Container>
         <div className="grid gap-6 lg:grid-cols-2">
-          <Reveal>
+          <Reveal direction="right">
             <Sheet className="relative h-full overflow-hidden px-8 py-12 sm:px-11">
               <Rings tone="green" className="-bottom-36 -right-20 w-[22rem] opacity-25" />
               <div className="relative">
@@ -101,7 +95,7 @@ function MissionVision() {
             </Sheet>
           </Reveal>
 
-          <Reveal delay={110}>
+          <Reveal delay={110} direction="left">
             <Sheet tone="lime" className="relative h-full overflow-hidden px-8 py-12 sm:px-11">
               <div className="relative">
                 <IconVision className="h-12 w-12 text-ink" />
@@ -111,8 +105,6 @@ function MissionVision() {
             </Sheet>
           </Reveal>
         </div>
-
-
       </Container>
     </Section>
   )
@@ -123,8 +115,6 @@ function CoreValues() {
   return (
     <Section className="relative overflow-hidden bg-white">
       <HatchCorner />
-      <Dot tone="red" size={54} className="left-[6%] top-24 opacity-90" />
-      <Dot tone="green" size={26} className="bottom-24 right-[10%]" />
 
       <Container>
         <SectionHeading
@@ -144,25 +134,31 @@ function CoreValues() {
               <Reveal key={v.title} delay={i * 70}>
                 <Sheet
                   tone={lime ? 'lime' : 'ink'}
-                  className="flex h-full flex-col gap-5 rounded-[1.75rem] px-7 py-9 sm:rounded-[1.75rem]"
+                  className="relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] px-7 py-9 sm:rounded-[1.75rem]"
                 >
-                  <div className="flex items-center justify-between">
+                  <span
+                    aria-hidden
+                    className={`pointer-events-none absolute -bottom-3 -right-2 select-none font-display text-[5.2rem] font-extrabold leading-none tracking-tighter opacity-[0.12] ${
+                      lime ? 'text-ink' : 'text-lime-400'
+                    }`}
+                  >
+                    0{i + 1}
+                  </span>
+
+                  <div className="relative z-10 space-y-4">
                     <Icon className={`h-11 w-11 ${lime ? 'text-ink' : 'text-white'}`} />
-                    <NumberBadge n={i + 1} className="h-7 w-7 text-xs" />
+                    <h3 className={`font-display text-[1.25rem] font-extrabold ${lime ? 'text-ink' : 'text-lime-400'}`}>
+                      {v.title}
+                    </h3>
+                    <p className={`text-sm leading-[1.75] ${lime ? 'text-ink/75' : 'text-white/70'}`}>
+                      {v.body}
+                    </p>
                   </div>
-                  <h3 className={`font-display text-[1.2rem] font-extrabold ${lime ? 'text-ink' : 'text-lime-400'}`}>
-                    {v.title}
-                  </h3>
-                  <p className={`text-sm leading-[1.75] ${lime ? 'text-ink/70' : 'text-white/65'}`}>
-                    {v.body}
-                  </p>
                 </Sheet>
               </Reveal>
             )
           })}
         </div>
-
-
       </Container>
     </Section>
   )
@@ -224,7 +220,6 @@ function Qhse() {
 
             <div className="relative mt-10 max-w-md">
               <Polaroid src="/images/engineers-ppe.jpg" alt="Engineers in full PPE" rotate={2} />
-              <Dot tone="red" size={28} className="-bottom-3 -right-4" />
             </div>
           </Reveal>
 

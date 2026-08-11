@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { Button, Container, Eyebrow, Reveal, Section } from '../components/ui'
-import { Dot, HatchCorner, NumberBadge, Rings, Sheet } from '../components/motifs'
+import { HatchCorner, NumberBadge, Rings, Sheet } from '../components/motifs'
 import { IconGear, IconPeople, IconPin } from '../components/icons'
 import { capabilities, company } from '../content'
 
@@ -119,11 +119,10 @@ function Enquiry() {
   return (
     <Section className="overflow-hidden bg-white">
       <HatchCorner />
-      <Dot tone="red" size={40} className="bottom-20 left-[5%] opacity-90" />
 
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1.05fr_1fr]">
-          <Reveal>
+          <Reveal direction="right">
             <Eyebrow>Send an enquiry</Eyebrow>
             <h2 className="text-[1.9rem] text-forest-600 sm:text-[2.5rem]">
               Tell us about your project
@@ -143,7 +142,7 @@ function Enquiry() {
             </ul>
           </Reveal>
 
-          <Reveal delay={110}>
+          <Reveal delay={110} direction="left">
             <Sheet tone="white" className="border border-ink/8 px-6 py-8 shadow-[0_24px_60px_-30px_rgba(10,10,18,0.35)] sm:px-9 sm:py-10">
               {sent ? (
                 <div className="py-12 text-center">
