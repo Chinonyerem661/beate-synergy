@@ -287,7 +287,7 @@ export const clients: Client[] = [
   { name: 'TotalEnergies',    logo: '/images/Total-energies.png' },
   { name: 'Seplat Energy',    logo: '/images/Seplat-energy-main.png',     logoClass: 'h-16' },
   { name: 'Baker Hughes',     logo: '/images/baker-hughes.png',            logoClass: 'h-16 sm:h-20 max-w-[185px]' },
-  { name: 'Chevron',          logo: '/images/chevron.jpg' },
+  { name: 'Chevron',          logo: '/images/chevron.jpg',                logoClass: 'h-16 sm:h-20 max-w-[185px]' },
   { name: 'Shell',            logo: '/images/shell-logo.png' },
   { name: 'N-Power',          logo: '/images/N-Power-Logo.jpg' },
   { name: 'Aiteo',            logo: '/images/logo-aiteo-big.png' },
