@@ -293,66 +293,66 @@ function Clients() {
   return (
     <Section className="bg-white">
       <Container>
-        {/* Clients */}
+        {/* Partners */}
         <SectionHeading
           eyebrow=""
-          title={<>Our <span className="text-forest-600">Clients</span></>}
+          title={<>Our <span className="text-forest-600">Partners</span></>}
           align="center"
-          className="mb-12"
+          className="mb-10"
         />
-
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8">
-          {clients.map((c, i) => (
-            <Reveal key={c.name} delay={i * 25}>
-              {c.logo ? (
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+          {partners.map((p) => (
+            <Reveal key={p.name}>
+              {p.logo ? (
                 <motion.img
                   whileHover={{ scale: 1.08, y: -2 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  src={c.logo}
-                  alt={c.name}
-                  title={c.name}
-                  className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${c.logoClass ?? 'h-12 max-w-[140px]'} ${c.removeBg ? 'mix-blend-multiply' : ''}`}
+                  src={p.logo}
+                  alt={p.name}
+                  title={p.name}
+                  className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${p.logoClass ?? 'h-16 sm:h-20 max-w-[220px]'} ${p.removeBg ? 'mix-blend-multiply' : ''}`}
                 />
               ) : (
                 <motion.span
-                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileHover={{ scale: 1.08, y: -2 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  className="inline-block cursor-pointer font-display text-base font-bold text-ink/60 transition-colors hover:text-ink"
+                  className="inline-block cursor-pointer font-display text-xl font-extrabold tracking-tight text-ink/60 transition-colors hover:text-ink"
                 >
-                  {c.name}
+                  {p.name}
                 </motion.span>
               )}
             </Reveal>
           ))}
         </div>
 
-        {/* Partners divider */}
+        {/* Clients divider */}
         <div className="mt-16 border-t border-ink/10 pt-14">
           <SectionHeading
             eyebrow=""
-            title={<>Our <span className="text-forest-600">Partners</span></>}
+            title={<>Our <span className="text-forest-600">Clients</span></>}
             align="center"
-            className="mb-10"
+            className="mb-12"
           />
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-            {partners.map((p) => (
-              <Reveal key={p.name}>
-                {p.logo ? (
+
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8">
+            {clients.map((c, i) => (
+              <Reveal key={c.name} delay={i * 25}>
+                {c.logo ? (
                   <motion.img
                     whileHover={{ scale: 1.08, y: -2 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    src={p.logo}
-                    alt={p.name}
-                    title={p.name}
-                    className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${p.logoClass ?? 'h-16 sm:h-20 max-w-[220px]'} ${p.removeBg ? 'mix-blend-multiply' : ''}`}
+                    src={c.logo}
+                    alt={c.name}
+                    title={c.name}
+                    className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${c.logoClass ?? 'h-12 max-w-[140px]'} ${c.removeBg ? 'mix-blend-multiply' : ''}`}
                   />
                 ) : (
                   <motion.span
-                    whileHover={{ scale: 1.08, y: -2 }}
+                    whileHover={{ scale: 1.06, y: -2 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    className="inline-block cursor-pointer font-display text-xl font-extrabold tracking-tight text-ink/60 transition-colors hover:text-ink"
+                    className="inline-block cursor-pointer font-display text-base font-bold text-ink/60 transition-colors hover:text-ink"
                   >
-                    {p.name}
+                    {c.name}
                   </motion.span>
                 )}
               </Reveal>
