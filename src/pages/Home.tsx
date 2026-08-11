@@ -311,7 +311,7 @@ function Clients() {
                   src={c.logo}
                   alt={c.name}
                   title={c.name}
-                  className={`w-auto max-w-[140px] object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${c.logoClass ?? 'h-12'} ${c.removeBg ? 'mix-blend-multiply' : ''}`}
+                  className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${c.logoClass ?? 'h-12 max-w-[140px]'} ${c.removeBg ? 'mix-blend-multiply' : ''}`}
                 />
               ) : (
                 <motion.span
@@ -336,14 +336,26 @@ function Clients() {
           />
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
             {partners.map((p) => (
-              <motion.span
-                key={p}
-                whileHover={{ scale: 1.08, y: -2 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="inline-block cursor-pointer font-display text-xl font-extrabold tracking-tight text-ink/60 transition-colors hover:text-ink"
-              >
-                {p}
-              </motion.span>
+              <Reveal key={p.name}>
+                {p.logo ? (
+                  <motion.img
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    src={p.logo}
+                    alt={p.name}
+                    title={p.name}
+                    className={`w-auto object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${p.logoClass ?? 'h-16 sm:h-20 max-w-[220px]'} ${p.removeBg ? 'mix-blend-multiply' : ''}`}
+                  />
+                ) : (
+                  <motion.span
+                    whileHover={{ scale: 1.08, y: -2 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    className="inline-block cursor-pointer font-display text-xl font-extrabold tracking-tight text-ink/60 transition-colors hover:text-ink"
+                  >
+                    {p.name}
+                  </motion.span>
+                )}
+              </Reveal>
             ))}
           </div>
         </div>

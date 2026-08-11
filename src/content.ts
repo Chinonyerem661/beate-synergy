@@ -281,23 +281,27 @@ export const industriesNote =
 export type Client = { name: string; logo?: string; logoClass?: string; removeBg?: boolean }
 
 export const clients: Client[] = [
-  { name: 'ExxonMobil',       logo: '/images/ExxonMobil-Logo.wine.svg',   logoClass: 'h-16' },
+  { name: 'ExxonMobil',       logo: '/images/ExxonMobil-Logo.wine.svg',   logoClass: 'h-16 sm:h-20 max-w-[185px]' },
   { name: 'NNPC',             logo: '/images/NNPC-Logo.png' },
   { name: 'NLNG',             logo: '/images/NLNG.png' },
-  { name: 'TotalEnergies',    logo: '/images/Total-energies.jpg',  removeBg: true },
-  { name: 'Seplat Energy',    logo: '/images/Seplat-Energy.png',          logoClass: 'h-16' },
-  { name: 'Baker Hughes',     logo: '/images/436-4367350_baker-hughes-new-logo-hd-png-download.png', removeBg: true },
+  { name: 'TotalEnergies',    logo: '/images/Total-energies.png' },
+  { name: 'Seplat Energy',    logo: '/images/Seplat-energy-main.png',     logoClass: 'h-16' },
+  { name: 'Baker Hughes',     logo: '/images/baker-hughes.png',            logoClass: 'h-16 sm:h-20 max-w-[185px]' },
   { name: 'Chevron',          logo: '/images/chevron.jpg' },
   { name: 'Shell',            logo: '/images/shell-logo.png' },
   { name: 'N-Power',          logo: '/images/N-Power-Logo.jpg' },
   { name: 'Aiteo',            logo: '/images/logo-aiteo-big.png' },
-  { name: 'Aviam Offshore',   logo: '/images/aviam-logo.jpg',             logoClass: 'h-16' },
-  { name: 'Zamon Petroleum' },
+  { name: 'Aviam Offshore',   logo: '/images/aviam-logo.jpg',             logoClass: 'h-16 sm:h-20 max-w-[185px]' },
+  { name: 'Zamam Offshore',   logo: '/images/lamam-offshore.png',         logoClass: 'h-16 sm:h-20 max-w-[185px]' },
   { name: 'Sigmund',          logo: '/images/sigmund.png' },
   { name: 'Schulltech',       logo: '/images/schulltech-logo.png' },
   { name: 'Addax Petroleum',  logo: '/images/ADDAX-logo.webp' },
-  { name: 'Waltersmith',      logo: '/images/waltersmith.png',            logoClass: 'h-16' },
-  { name: 'Renaissance' },
+  { name: 'Waltersmith',      logo: '/images/waltersmith.png',            logoClass: 'h-16 sm:h-20 max-w-[185px]' },
 ]
 
-export const partners = ['Crafwell', 'Allianz'] as const
+export type Partner = { name: string; logo?: string; logoClass?: string; removeBg?: boolean }
+
+export const partners: Partner[] = [
+  { name: 'Crafwell', logo: '/images/crafwell-logo.png', logoClass: 'h-24 sm:h-28 max-w-[300px]' },
+  { name: 'Allianz',  logo: '/images/Allianz-logo.png',  logoClass: 'h-12 sm:h-14 max-w-[170px]' },
+]
